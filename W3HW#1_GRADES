@@ -1,0 +1,97 @@
+#include <stdio.h>
+#include <cs50.h>
+
+const int N = 9; // 전역변수
+const int CUTLINE_SCORE[N] = {95, 90, 85, 80, 75, 70, 65, 60, 0};
+const char *GRADES[N] = {"A+", "A", "B+", "B", "C+", "C", "D+", "D", "F"};
+
+void print_table(); // 함수 프로토타입
+void get_grade_alphabet(int score);
+
+int main()
+{
+    print_table();
+
+    int input = get_int("\n성적을 입력하세요(0~100) : "); // 성적을 입력받는 행위
+    while(input!=999) // 999에서 꺼지는 루프
+    {
+        if(0<=input&&input<=100)
+        {
+            get_grade_alphabet(input);
+            input = get_int("\n성적을 입력하세요(0~100) : ");
+        }
+        else
+        {
+            input = get_int("\n**%i 성적을 올바르게 입력하세요! (0 ~ 100) : ",input);
+        }
+    }
+
+}
+
+void print_table() // 학점테이블 출력을 위한 동작
+{
+    printf("[학점테이블].\n");
+    for(int i = 0; i < N; i++ )
+    {
+        printf("index: ");
+        printf("%-6i ",i);
+    }
+
+    printf("\n");
+    for(int i = 0; i < N; i++ )
+    {
+        printf("학점: ");
+        printf("%-8s",GRADES[i]);
+
+    }
+
+    printf("\n");
+    for(int i = 0; i < N; i++ )
+    {
+        printf("성적: ");
+        printf("%-7i ",CUTLINE_SCORE[i]);
+    }
+    printf("\n[종료를 원한다면 999를 입력].\n");
+}
+
+void get_grade_alphabet(int score) //점수에 따른 학점 부여를 위한 동작
+{
+    switch(score)
+    {
+        case 95 ... 100 :
+            printf("학점은 %s 입니다.",GRADES[0]);
+            break;
+
+        case 90 ... 94 :
+            printf("학점은 %s 입니다.",GRADES[1]);
+            break;
+
+        case 85 ... 89 :
+            printf("학점은 %s 입니다.",GRADES[2]);
+            break;
+
+        case 80 ... 84 :
+            printf("학점은 %s 입니다.",GRADES[3]);
+            break;
+
+        case 75 ... 79 :
+            printf("학점은 %s 입니다.",GRADES[4]);
+            break;
+
+        case 70 ... 74 :
+            printf("학점은 %s 입니다.",GRADES[5]);
+            break;
+
+        case 65 ... 69 :
+            printf("학점은 %s 입니다.",GRADES[6]);
+            break;
+
+        case 60 ... 64 :
+            printf("학점은 %s 입니다.",GRADES[7]);
+            break;
+
+        default:
+            printf("학점은 %s 입니다.",GRADES[8]);
+            break;
+    }
+}
