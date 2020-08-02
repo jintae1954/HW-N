@@ -1,0 +1,63 @@
+#include <stdio.h>
+#include <cs50.h>
+
+void judgement(int arr[], int brr[]); // 프로토타입
+void bubbleSort(int arr[], int arrLength);
+
+int main(void)
+{
+     int a1[5] = {1,2,3,4,5}; // 데이터
+     int a2[5] = {5,4,3,2,1};
+     //True
+
+     int b1[5] = {1,4,2,5,8};
+     int b2[5] = {2,5,4,3,1};
+     //False
+
+     int c1[5] = {1,1,1,3,2};
+     int c2[5] = {2,1,1,3,1};
+     //True
+
+    judgement(a1,a2); // 정렬된 배열들 판단하는 행위
+    judgement(b1,b2);
+    judgement(c1,c2);
+}
+
+void judgement(int arr[], int brr[]) // 배열의 digit을 판단하는 함수
+{
+    bubbleSort(arr,5);
+    bubbleSort(brr,5); // 배열 정렬 완료
+
+    int digitCheck;
+
+    for(int i = 0; i < 5; i++)
+    {
+        digitCheck = arr[i] - brr[i];
+    }
+    if(digitCheck == 0)
+    {
+        printf("True\n");
+    }
+    else
+    {
+        printf("False\n");
+    }
+}
+
+void bubbleSort(int arr[], int length) // 버블정렬
+{
+    int temp;
+
+    for(int i = 0; i < length; i++)
+    {
+        for(int j = 0; j < length-1; j++)
+        {
+            if(arr[j] > arr[j+1])
+            {
+                temp = arr[j];
+                arr[j] = arr[j+1];
+                arr[j+1] = temp;
+            }
+        }
+    }
+}
